@@ -6,10 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Boostrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- Font Awesome icons link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- CSS sheet link -->
+    <link rel="stylesheet" href="style.css">
+
     <title>Todo List</title>
 </head>
-<body>
-    
+<body class="bg-success text-light">
+    <div class="container">
+        <div class="text-center my-5">
+            <h1>Todo List</h1>
+        </div>
+        <div class="w-50 container">
+
+            <div id="inputForm">
+                <div class="mb-3 d-flex gap-2">
+                  <input type="text" class="form-control form-control-lg" id="task" placeholder="Enter a Task...">
+                  <button type="submit" class="btn btn-light btn-lg" id="addBtn">Add</button>
+                </div>
+            </div>
+            <ul class="list-group gap-2" id="todos">
+                <li class="list-group-item listItem" style="display: none;">
+                    <div class="ms-1 d-flex align-items-center">
+                        <input type="checkbox" class="me-2 chkbox">
+                        <span>Sample</span>
+                    </div>
+                    <div>
+                        <button class="btn delete">
+                            <i class="fa fa-trash text-danger"></i>
+                        </button>
+                        <button class="btn edit">
+                            <i class="fa fa-edit text-primary"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <script src="./app.js"></script>
 </body>
