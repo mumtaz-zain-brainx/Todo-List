@@ -1,17 +1,24 @@
 // Getting Input/Items 
+
 const addBtn = document.getElementById("addBtn");
 const task = document.getElementById("task");
 
 const todos = document.getElementById("todos");
 
-const deleteBtns = document.getElementsByClassName("delete");
 const checkboxBtns = document.getElementsByClassName("chkbox");
+const editBtns = document.getElementsByClassName("edit");
+const editInputs = document.getElementsByClassName("editInput");
+const deleteBtns = document.getElementsByClassName("delete");
 
 
-addDeleteBtn()
-addTaskCompleted()
-// Adding Event Listener(s)
+deleteTask()
+editTask()
+completeTask()
 
+/* Adding Event Listener(s) and creating functions */
+
+
+// Adding keypress event on Add task input field.
 task.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -54,6 +61,7 @@ function addTask(){
     
         taskDiv.appendChild(checkbox)
         taskDiv.appendChild(span)
+        taskDiv.appendChild(editInput)
     
         // List button creatation 
         const btnDiv = document.createElement("div");
@@ -80,8 +88,8 @@ function addTask(){
         editBtn.appendChild(editIcon)
         
     
-        btnDiv.appendChild(deleteBtn)
         btnDiv.appendChild(editBtn)
+        btnDiv.appendChild(deleteBtn)
     
     
     
@@ -92,8 +100,9 @@ function addTask(){
     
         task.value = ""
     
-        addDeleteBtn()
-        addTaskCompleted()
+        deleteTask()
+        editTask()
+        completeTask()
 
     }
 }
@@ -101,8 +110,9 @@ function addTask(){
 
 
 
-function addTaskCompleted(){
+function completeTask(){
     for(let i = 0; i<checkboxBtns.length;i++){
+        // Adding click event on checkbox
         checkboxBtns[i].addEventListener('click', function() {
             if(checkboxBtns[i].checked){
                 checkboxBtns[i].nextSibling.style.textDecoration = "line-through";
@@ -115,12 +125,34 @@ function addTaskCompleted(){
 
 
 
-function addDeleteBtn(){
+function deleteTask(){
 
     for (let i = 0; i < deleteBtns.length; i++) {
-      deleteBtns[i].onclick = function() {
-        var listItem = this.parentElement.parentElement;
-        listItem.style.display = "none";
-      }
+        // Adding click event on delete button
+        deleteBtns[i].onclick = function() {
+            var listItem = this.parentElement.parentElement;
+            listItem.style.display = "none";
+        }
     }
 }
+
+function editTask(){
+    for (let i = 0; i < editBtns.length; i++) {
+        // Adding click event on edit button
+        editBtns[i].onclick = function() {
+            // Displaying edit field and hidding text field
+            editInputs[i].style.display="block";
+            editInputs[i].value = editInputs[i].previousSibling.innerText;
+            editInputs[i].previousSibling.style.display = "none";
+
+            // Adding focusout event on edit field
+            editInputs[i].addEventListener("focusout",function(){
+                // Displaying text field and hidding edit field
+                editInputs[i].previousSibling.style.display = "block";
+                editInputs[i].previousSibling.innerText = editInputs[i].value;
+                editInputs[i].style.display="none";
+            })
+        }
+    }
+}
+   
